@@ -6,34 +6,34 @@ const app = express()
 const config = require('./config')
 
 // Routes Error Handler Middleware
-const expressErrorHandler = require('./middlewares/express')
+// const expressErrorHandler = require('./middlewares/express')
 
 // ERROR HANDLING PROCESS
-require('./logging')()
+// require('./logging')()
 
 // DB
 require('./db')()
 
 // MIDDLEWARES
-require('./middlewares')(app)
+// require('./middlewares')(app)
 
-app.use(function(req, res, next) {
-  // console.log('passed cookies in a request', req.cookies)
+// app.use(function(req, res, next) {
+//   // console.log('passed cookies in a request', req.cookies)
 
-  res.header('Access-Control-Allow-Origin', config.AccessControlAllowOrigin)
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin'
-  )
-  res.header('Access-Control-Allow-Credentials', 'true')
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS')
+//   res.header('Access-Control-Allow-Origin', config.AccessControlAllowOrigin)
+//   res.header(
+//     'Access-Control-Allow-Headers',
+//     'Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin'
+//   )
+//   res.header('Access-Control-Allow-Credentials', 'true')
+//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS')
 
-  next()
-})
+//   next()
+// })
 
 // ROUTES
-app.use(require('./routes'))
-app.use(expressErrorHandler)
+// app.use(require('./routes'))
+// app.use(expressErrorHandler)
 // require('./routes')(app)
 
 // if (process.env.NODE_ENV !== 'local') {
