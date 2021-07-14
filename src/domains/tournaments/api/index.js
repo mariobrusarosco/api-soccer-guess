@@ -16,6 +16,7 @@ console.log({ Tournament })
 // MiddlewaresTokenExpiredError
 // const authorization = require('../../middlewares/authorization')
 
+
 Router.get('/', async (req, res) => {
   res.status(200).send([{
     id: "4dfs3242",

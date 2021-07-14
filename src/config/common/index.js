@@ -5,8 +5,9 @@ const packageJSON = require('../../../package.json')
 const errorsMap = require('./errorsMap')
 
 const commonConfiguration = {
+  AccessControlAllowOrigin: '*',
   APP_NAME: 'Code Notes',
-  API_VERSION: '/api/v1',  API_VERSION: '/api/v1',
+  API_VERSION: '/api/v1',
   errorsMap,
   USER_COOKIE_NAME: 'P_U',
   AUTHORIZATION_COOKIE_NAME: 'P_A'

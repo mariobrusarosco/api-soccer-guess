@@ -14,7 +14,7 @@ dotenv.config({ path: '../.env' })
 // const expressErrorHandler = require('./middlewares/express')
 
 // ERROR HANDLING PROCESS
-// require('./logging')()
+require('./logging')()
 
 // DB
 require('./db')()
@@ -22,19 +22,19 @@ require('./db')()
 // MIDDLEWARES
 // require('./middlewares')(app)
 
-// app.use(function(req, res, next) {
-//   // console.log('passed cookies in a request', req.cookies)
+app.use(function(req, res, next) {
+  // console.log('passed cookies in a request', req.cookies)
 
-//   res.header('Access-Control-Allow-Origin', config.AccessControlAllowOrigin)
-//   res.header(
-//     'Access-Control-Allow-Headers',
-//     'Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin'
-//   )
-//   res.header('Access-Control-Allow-Credentials', 'true')
-//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS')
+  res.header('Access-Control-Allow-Origin', "*")
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin'
+  )
+  res.header('Access-Control-Allow-Credentials', 'true')
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS')
 
-//   next()
-// })
+  next()
+})
 
 // ROUTES
 app.use(require('./domains/tournaments'))
@@ -52,9 +52,9 @@ app.use(require('./domains/tournaments'))
 // )
 // app.use(express.static('dist'))
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'index.html'))
-})
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, 'index.html'))
+// })
 
 // Listener
 app.listen(PORT, () => console.log(`Serving at ${PORT} - ${process.env.NODE_ENV}`))
