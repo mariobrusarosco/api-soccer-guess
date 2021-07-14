@@ -1,9 +1,14 @@
 const PORT = process.env.PORT || 9090
 const express = require('express')
+const dotenv = require("dotenv")
 const app = express()
+const path = require('path')
 
-// App Setitngs
-const config = require('./config')
+// App Setitngs JS Approach
+// const config = require('./config')
+
+// App Setitngs DOT ENV approach
+dotenv.config({ path: '../.env' })
 
 // Routes Error Handler Middleware
 // const expressErrorHandler = require('./middlewares/express')
@@ -32,7 +37,7 @@ require('./db')()
 // })
 
 // ROUTES
-// app.use(require('./routes'))
+app.use(require('./domains/tournaments'))
 // app.use(expressErrorHandler)
 // require('./routes')(app)
 
@@ -47,11 +52,9 @@ require('./db')()
 // )
 // app.use(express.static('dist'))
 
-// If the server does not recognize a route... it's gonna serve index.html
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '..', 'dist', 'index.html'))
-// })
-// }
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'index.html'))
+})
 
 // Listener
 app.listen(PORT, () => console.log(`Serving at ${PORT} - ${process.env.NODE_ENV}`))
