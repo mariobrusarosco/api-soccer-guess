@@ -8,7 +8,7 @@ const credentials = isLocalEnv
 
 module.exports = () => {
   mongoose
-    .connect(credentials, { useNewUrlParser: true,  useUnifiedTopology: true })
+    .connect(process.env.DB_CREDENTIALS, { useNewUrlParser: true,  useUnifiedTopology: true })
     .then(() => {
       console.log('Connected to a mongo DB')
     })

@@ -7,20 +7,21 @@ const path = require('path')
 // App Setitngs JS Approach
 // const config = require('./config')
 
+
 // App Setitngs DOT ENV approach
 dotenv.config({ path: '../.env' })
 
 // Routes Error Handler Middleware
-// const expressErrorHandler = require('./middlewares/express')
+const expressErrorHandler = require('./middlewares/express')
 
 // ERROR HANDLING PROCESS
-require('./logging')()
+// require('./logging')()
 
 // DB
 require('./db')()
 
 // MIDDLEWARES
-// require('./middlewares')(app)
+require('./middlewares')(app)
 
 app.use(function(req, res, next) {
   // console.log('passed cookies in a request', req.cookies)
@@ -38,7 +39,7 @@ app.use(function(req, res, next) {
 
 // ROUTES
 app.use(require('./domains/tournaments'))
-// app.use(expressErrorHandler)
+app.use(expressErrorHandler)
 // require('./routes')(app)
 
 // if (process.env.NODE_ENV !== 'local') {
@@ -52,9 +53,9 @@ app.use(require('./domains/tournaments'))
 // )
 // app.use(express.static('dist'))
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, 'index.html'))
-// })
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'index.html'))
+})
 
 // Listener
 app.listen(PORT, () => console.log(`Serving at ${PORT} - ${process.env.NODE_ENV}`))

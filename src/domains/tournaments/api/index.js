@@ -10,7 +10,7 @@ const ObjectId = mongoose.Types.ObjectId
 
 // Models
 const Tournament = require('../model')
-console.log({ Tournament })
+// console.log({ Tournament })
 // const Topic = require('../../models/Topic')
 
 // MiddlewaresTokenExpiredError
@@ -31,18 +31,23 @@ Router.get('/', async (req, res) => {
 Router.post('/', async (req, res) => {
   // const tournamentGivenData = req.body
 
+  // console.log(req.body)
+
   if (!req.body) {
     res.status(400).send('empty body for a tournament post')
-
-    fileLogger.error('empty body for a tournament post')
   }
 
-  const newTournament = await new newTournament({ ...req.body })
-  console.log({ newTournament })
+  const newTournament = await new Tournament({ ...req.body })
 
-  const insertionResult = await newTournament.save()
+  try{
+    const insertionResult = await newTournament.save()
 
-  res.send(insertionResult)
+    res.status(200).send(insertionResult)
+  }catch(error) {
+    const errorMessage = error.code == 11000 ? "Mongo DB: duplicated key" : "Mongo DB error when trying to save()";
+
+    res.status(500).send({...error, errorMessage })
+  }
 })
 
 // Router.put('/', async (req, res) => {
