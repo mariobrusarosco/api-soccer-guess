@@ -8,31 +8,24 @@ const ObjectId = mongoose.Types.ObjectId
 // Project's Config
 // const { errorsMap, USER_COOKIE_NAME } = require('../../config')
 
-// Models
+// Model
 const Tournament = require('../model')
-// console.log({ Tournament })
-// const Topic = require('../../models/Topic')
 
 // MiddlewaresTokenExpiredError
 // const authorization = require('../../middlewares/authorization')
 
 
 Router.get('/', async (req, res) => {
-  res.status(200).send([{
-    id: "4dfs3242",
-    label: "World Cup 2022"
-  },
-  {
-    id: "gf435",
-    label: "Brasileirao 2022"
-  }])
+  try {
+    const allTournaments = await Tournament.find()
+
+    res.status(200).send(allTournaments)
+  } catch (err) {
+     res.status(500).send("generic error")
+  }
 })
 
 Router.post('/', async (req, res) => {
-  // const tournamentGivenData = req.body
-
-  // console.log(req.body)
-
   if (!req.body) {
     res.status(400).send('empty body for a tournament post')
   }

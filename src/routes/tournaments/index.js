@@ -32,7 +32,7 @@ Router.get('/', async (req, res) => {
 
     const user = ObjectId(req.body.user)
 
-    const allNotes = await Note.find({ user })
+    const allNotes = await Note.find()
       .populate('topic', 'label -_id')
       .select('user description content topic related_notes')
 
